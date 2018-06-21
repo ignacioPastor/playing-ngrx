@@ -1,4 +1,16 @@
-<h1>My list of tasks</h1>
-<div *ngFor="let task of tasks">
-  <div>{{ task }}</div>
+<div id="mainWrapper">
+  <h1>My list of tasks</h1>
+  <ul>
+    <li *ngFor="let task of tasks">{{ task.name }}
+      <span title="Remove task" (click)="removeTask(task.id)">
+        <i class="fas fa-times click-me"></i>
+      </span>
+    </li>
+
+  </ul>
+  <div id="newTask">
+    <input [(ngModel)]="newTask">
+    <button (click)="saveTask()">Save</button>
+  </div>
+
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscriber } from 'rxjs';
 import { TaskService } from './../../services/task.service';
+import { Task } from './../../model/task';
 
 @Component({
   selector: 'task-list',
@@ -8,12 +8,25 @@ import { TaskService } from './../../services/task.service';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  tasks: string[] = [];
+  tasks: Task[] = [];
+  newTask: string = '';
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
     this.taskService.getTasks().subscribe(res => {
+      console.log('res: ', res);
       this.tasks = res;
     });
+  }
+
+  saveTask() {
+    if (this.newTask !== '') {
+      this.taskService.addTask(this.newTask);
+      this.newTask = '';
+    }
+  }
+
+  removeTask(taskId: string) {
+    this.taskService.removeTask(taskId);
   }
 }
