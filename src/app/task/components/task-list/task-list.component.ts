@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from './../../services/task.service';
 import { Task } from './../../model/task';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'task-list',
@@ -8,15 +9,12 @@ import { Task } from './../../model/task';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  tasks: Task[] = [];
+  tasks: Observable<Task[]>;
   newTask: string = '';
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(res => {
-      console.log('res: ', res);
-      this.tasks = res;
-    });
+    this.tasks = this.taskService.getTasks();
   }
 
   saveTask() {
