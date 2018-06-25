@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Task } from './../../model/task';
 import { Store } from '@ngrx/store';
-import { IAppState } from './../../../state/models/app-state';
+import { IAppState } from './../../state/models/app-state';
 import { Observable } from 'rxjs';
-import * as taskActions from './../../../state/actions/task.actions';
+import * as taskActions from './../../state/actions/task.actions';
 
 @Component({
   selector: 'task-list',

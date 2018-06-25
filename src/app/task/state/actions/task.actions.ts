@@ -1,4 +1,4 @@
-import { Task } from './../../task/model/task';
+import { Task } from './../../model/task';
 
 export const LOAD_TASKS = 'LOAD_TASKS';
 export const LOAD_TASKS_SUCCESS = 'LOAD_TASKS_SUCCESS';
