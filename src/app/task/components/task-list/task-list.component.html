@@ -2,7 +2,7 @@
   <h1>My list of tasks</h1>
   <ul>
     <li *ngFor="let task of tasks | async">{{ task.name }}
-      <span title="Remove task" (click)="removeTask(task.id)">
+      <span title="Remove task" (click)="deleteTask(task.id)">
         <i class="fas fa-times click-me"></i>
       </span>
     </li>

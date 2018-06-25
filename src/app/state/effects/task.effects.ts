@@ -13,4 +13,10 @@ export class TaskEffects {
     switchMap(() => this.taskService.getTasks()),
     map(tasks => new taskActions.LoadTaskSuccessAction(tasks))
   );
+
+  @Effect()
+  deleteTask$ = this.actions$.ofType(taskActions.DELETE_TASKS).pipe(
+    switchMap((action: any) => this.taskService.deleteTask(action.payload)),
+    map(taskId => new taskActions.DeleteTaskSuccessAction(taskId))
+  );
 }

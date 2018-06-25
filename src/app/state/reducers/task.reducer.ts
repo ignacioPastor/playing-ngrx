@@ -1,10 +1,11 @@
 import * as taskActions from './../actions/task.actions';
-import { Task } from './../../task/model/task';
 
-export function taskReducer(state = [new Task({ name: 'Default 1' })], action: taskActions.Action) {
+export function taskReducer(state = [], action: taskActions.Action) {
   switch (action.type) {
     case taskActions.LOAD_TASKS_SUCCESS:
       return action.payload;
+    case taskActions.DELETE_TASKS_SUCCESS:
+      return state.filter(task => task.id !== action.payload);
     default:
       return state;
   }

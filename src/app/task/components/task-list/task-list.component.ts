@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Task } from './../../model/task';
 import { Store } from '@ngrx/store';
 import { IAppState } from './../../../state/models/app-state';
@@ -8,7 +8,8 @@ import * as taskActions from './../../../state/actions/task.actions';
 @Component({
   selector: 'task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
+  styleUrls: ['./task-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListComponent implements OnInit {
   tasks: Observable<Task[]>;
@@ -32,7 +33,7 @@ export class TaskListComponent implements OnInit {
     // }
   }
 
-  removeTask(taskId: string) {
-    // this.taskService.removeTask(taskId);
+  deleteTask(taskId: string) {
+    this.store.dispatch(new taskActions.DeleteTaskAction(taskId));
   }
 }

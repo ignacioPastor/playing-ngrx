@@ -21,8 +21,9 @@ export class TaskService {
     this.tasks.push(new Task({ name: newTask }));
   }
 
-  removeTask(taskId) {
-    this.tasks.splice(this.tasks.findIndex(task => task.id === taskId), 1);
+  deleteTask(taskId) {
+    const resDel = this.tasks.splice(this.tasks.findIndex(task => task.id === taskId), 1);
+    return of(resDel && resDel[0] ? resDel[0].id : null);
   }
 
   private populateInitialTasks() {
