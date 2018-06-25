@@ -26,11 +26,11 @@ export class TaskListComponent implements OnInit {
     this.store.dispatch(new taskActions.LoadTaskAction());
   }
 
-  saveTask() {
-    // if (this.newTask !== '') {
-    //   this.taskService.addTask(this.newTask);
-    //   this.newTask = '';
-    // }
+  addNewTask() {
+    if (this.newTask !== '') {
+      this.store.dispatch(new taskActions.AddNewTaskAction(this.newTask));
+      this.newTask = '';
+    }
   }
 
   deleteTask(taskId: string) {

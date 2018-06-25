@@ -6,6 +6,8 @@ export function taskReducer(state = [], action: taskActions.Action) {
       return action.payload;
     case taskActions.DELETE_TASKS_SUCCESS:
       return state.filter(task => task.id !== action.payload);
+    case taskActions.ADD_NEW_TASK_SUCCESS:
+      return [...state, action.payload];
     default:
       return state;
   }
