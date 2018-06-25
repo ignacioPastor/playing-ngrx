@@ -6,31 +6,30 @@ import { Task } from './../model/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private tasks: Task[] = [];
   private taskProvider$;
 
-  constructor() {
-    this.populateInitialTasks();
-  }
+  constructor() {}
 
   getTasks(): Observable<Task[]> {
-    return of(this.tasks).pipe(delay(2000));
+    return of(this.initialValues()).pipe(delay(2000));
   }
 
-  addTask(newTask: string) {
-    this.tasks.push(new Task({ name: newTask }));
+  addNewTask(newTaskName: string): Observable<Task> {
+    const newTask = new Task({ name: newTaskName });
+    return of(newTask);
   }
 
-  removeTask(taskId) {
-    this.tasks.splice(this.tasks.findIndex(task => task.id === taskId), 1);
+  deleteTask(taskId): Observable<string> {
+    return of(taskId);
   }
 
-  private populateInitialTasks() {
-    const myTask: Task = new Task({ name: 'mhol' });
-    let nTask = 7;
-    while (nTask > 0) {
-      this.tasks.push(new Task({ name: 'Task ' + nTask-- }));
+  /** Return an array of Task as default values */
+  private initialValues(): Task[] {
+    const initialValues: Task[] = [];
+    let nTask = 0;
+    while (nTask < 7) {
+      initialValues.push(new Task({ name: 'Task ' + ++nTask }));
     }
-    this.tasks.reverse();
+    return initialValues;
   }
 }
