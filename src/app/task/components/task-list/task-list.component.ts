@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from './../../services/task.service';
 import { Task } from './../../model/task';
 import { Store } from '@ngrx/store';
 import { IAppState } from './../../../state/models/app-state';
 import { Observable } from 'rxjs';
+import * as taskActions from './../../../state/actions/task.actions';
 
 @Component({
   selector: 'task-list',
@@ -13,18 +13,16 @@ import { Observable } from 'rxjs';
 export class TaskListComponent implements OnInit {
   tasks: Observable<Task[]>;
   newTask: string = '';
-  constructor(private store: Store<IAppState>) {}
+  constructor(private store: Store<IAppState>) {
+    this.tasks = this.store.select(state => state.tasks);
+  }
 
   ngOnInit() {
     this.getTasks();
   }
 
   getTasks() {
-    // this.taskService.getTasks().subscribe(res => {
-    //   this.tasks = res;
-    // });
-
-    this.tasks = this.store.select(state => state.tasks);
+    this.store.dispatch(new taskActions.LoadTaskAction());
   }
 
   saveTask() {
