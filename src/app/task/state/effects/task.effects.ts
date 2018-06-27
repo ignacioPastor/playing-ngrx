@@ -5,6 +5,10 @@ import * as taskActions from './../actions/task.actions';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Task } from './../../model/task';
 
+/**
+ * Here we would manage the comunication with the database.
+ * If everything goes well, send action success
+ */
 @Injectable()
 export class TaskEffects {
   constructor(private taskService: TaskService, private actions$: Actions) {}
