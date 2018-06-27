@@ -1,5 +1,9 @@
 import * as taskActions from './../actions/task.actions';
 
+/**
+ * Here we handle the actions result of the effects.
+ * Right now just success cases, but it could handle actions in case of errors.
+ */
 export function taskReducer(state = [], action: taskActions.Action) {
   switch (action.type) {
     case taskActions.LOAD_TASKS_SUCCESS:
